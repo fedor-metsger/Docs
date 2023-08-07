@@ -54,8 +54,9 @@ DATABASES = {
 ./manage.py runserver 0.0.0.0:8000
 ```
 
-### Устанавливаем `gunicorn`
+### Устанавливаем `gunicorn` в виртуальном окружении
 ```
+. venv/bin/activate
 pip install gunicorn
 cat > /etc/systemd/system/gunicorn.service <<EOF
 [Unit]
@@ -91,4 +92,9 @@ server {
 EOF
 ln -s /etc/nginx/sites-available/<project_name> /etc/nginx/sites-enabled
 systemctl start nginx
+```
+### Собираем статику в кучу
+```
+. venv/bin/activate
+./manage.py collectstatic
 ```
