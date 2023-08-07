@@ -7,6 +7,69 @@ usermod username -aG sudo
 
 ### Скачиваем проект
 ```
-git clone
+git clone <github_url>
 ```
 
+### Устанавливаем пакеты
+```
+sudo apt install python3-venv python3-pip postgresql nginx expect python-is-python3
+```
+
+### Создаём виртуальное окружение, устанавливаем модули
+```
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+pip freeze
+```
+
+### Создаём БД
+```
+sudo su postgres
+psql
+ALTERUSER postgres WITH PASSWORD '123456';
+CREATE DATABASE db_name;
+\q
+exit
+```
+
+### Правим `settings.py`
+```
+DEBUG=False
+ALLOWED_HOSTS=
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'netology_stocks_products',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        "USER": "postgres",
+        "PASSWORD": "Qwer!234"
+    }
+}
+```
+### Прогоняем миграции и запускаем сервер
+```
+./manage.py migrate
+./manage.py runserver 0.0.0.0:8000
+```
+
+### Устанавливаем `gunicorn`
+```
+pip install gunicorn
+cat > /etc/systemd/system/gunicorn.service <<EOF
+[Unit]
+Description=Service for gunicorn
+After=network.target
+
+[Service]
+User=<user_name>
+WorkingDirectory=/home/<user_name>/<project_dir>
+ExecStart=/home/<user_name>/<project_dir>/venv/bin/gunicorn --workers 3 --bind unix:/home/<user_name>/<project_dir>/project.sock config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl start gunicorn.service
+sudo systemctl enable gunicorn.service
+```
