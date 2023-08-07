@@ -83,11 +83,12 @@ server {
   location /static/ {
     root /home/<user_name>/<project_name>;
   }
-  localtion / {
+  location / {
     include proxy_params;
     proxy_pass http://unix:/home/<user_name>/<project_dir>/project.sock;
   }
 }
 EOF
+ln -s /etc/nginx/sites-available/<project_name> /etc/nginx/sites-enabled
 systemctl start nginx
 ```
