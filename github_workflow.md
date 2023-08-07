@@ -65,7 +65,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: linter
         run: flake8 <project_dir> --exclude <project_dir>/migtrations
-      - name: name: Тестирование
+      - name: Тестирование
         run: ./manage.py test
         env:
           SECRET_KEY: ${{ env.SECRET_KEY }}
