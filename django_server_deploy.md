@@ -73,3 +73,21 @@ EOF
 sudo systemctl start gunicorn.service
 sudo systemctl enable gunicorn.service
 ```
+
+### Настраиваем `nginx`
+```
+cat > /etc/nginx/sites-available/<project_name> <<EOF
+server {
+  listen 80;
+  server_name <IP_ADDRESS>;
+  location /static/ {
+    root /home/<user_name>/<project_name>;
+  }
+  localtion / {
+    include proxy_params;
+    proxy_pass http://unix:/home/<user_name>/<project_dir>/project.sock;
+  }
+}
+EOF
+systemctl start nginx
+```
