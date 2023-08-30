@@ -27,7 +27,7 @@ pip freeze
 ```
 sudo su postgres
 psql
-ALTERUSER postgres WITH PASSWORD '123456';
+ALTER USER postgres WITH PASSWORD '123456';
 CREATE DATABASE db_name;
 \q
 exit
