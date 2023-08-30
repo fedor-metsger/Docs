@@ -40,11 +40,11 @@ ALLOWED_HOSTS=
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'netology_stocks_products',
+        'NAME': 'db_name',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         "USER": "postgres",
-        "PASSWORD": "Qwer!234"
+        "PASSWORD": "postgres"
     }
 }
 ```
