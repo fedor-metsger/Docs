@@ -35,8 +35,8 @@ exit
 
 ### Правим `settings.py`
 ```
-DEBUG=False
-ALLOWED_HOSTS=
+DEBUG = True
+ALLOWED_HOSTS = ["127.0.0.1"]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
