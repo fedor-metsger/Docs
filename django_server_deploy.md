@@ -12,7 +12,7 @@ git clone <github_url>
 
 ### Устанавливаем пакеты
 ```
-sudo apt install python3-venv python3-pip postgresql nginx expect python-is-python3
+sudo apt install python3-venv python3-pip postgresql nginx expect python-is-python3 libpq-dev
 ```
 
 ### Создаём виртуальное окружение, устанавливаем модули
